@@ -1,67 +1,121 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Cpu, Network, Layers } from 'lucide-react';
+import { ArrowDown } from 'lucide-react';
 
 const Hero: React.FC = () => {
   return (
-    <section className="relative w-full py-20 px-6 overflow-hidden bg-slate-900 border-b border-slate-800">
-      {/* Background Elements */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-10 pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-cyan-500 rounded-full blur-[100px]" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-violet-500 rounded-full blur-[100px]" />
+    <section className="relative w-full min-h-screen flex flex-col justify-center items-center px-6 py-20 overflow-hidden bg-zinc-950 border-b border-white/5">
+      
+      {/* Liquid Background - Slower, more subtle */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none select-none">
+        <motion.div 
+          animate={{ 
+            rotate: [0, 360],
+            scale: [1, 1.1, 1],
+            opacity: [0.1, 0.15, 0.1],
+          }}
+          transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
+          className="absolute top-[-10%] left-[-10%] w-[70vw] h-[70vw] bg-gradient-to-b from-zinc-800 to-transparent rounded-full blur-[150px]" 
+        />
+        <motion.div 
+          animate={{ 
+            x: [-50, 50, -50],
+            y: [-50, 50, -50],
+            opacity: [0.05, 0.1, 0.05],
+          }}
+          transition={{ duration: 30, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-[10%] right-[10%] w-[60vw] h-[60vw] bg-zinc-800/30 rounded-full blur-[120px]" 
+        />
       </div>
 
-      <div className="max-w-5xl mx-auto text-center relative z-10">
+      <div className="max-w-5xl mx-auto relative z-10 flex flex-col items-center text-center">
+        
+        {/* Badge */}
         <motion.div 
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800 border border-slate-700 mb-6"
+          transition={{ duration: 0.8 }}
+          className="mb-12"
         >
-          <Cpu size={14} className="text-cyan-400" />
-          <span className="text-xs font-mono text-cyan-400 tracking-wider uppercase">Next Gen Architecture</span>
+          <div className="inline-flex items-center gap-3 px-3 py-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm">
+             <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]"></div>
+             <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-zinc-400">System Architecture v2.0</span>
+          </div>
         </motion.div>
 
+        {/* Headline */}
         <motion.h1 
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.1 }}
-          className="text-5xl md:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-400 mb-4 tracking-tight"
+          initial={{ opacity: 0, filter: "blur(10px)", y: 20 }}
+          animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+          transition={{ duration: 1, delay: 0.2 }}
+          className="text-5xl md:text-8xl font-light tracking-tighter text-white mb-6 leading-[0.85] select-none"
         >
-          The AI Operator<br />Framework
+          AI Operator
+          <span className="block text-zinc-600 text-4xl md:text-7xl mt-2 tracking-tight font-extralight">Framework</span>
         </motion.h1>
 
+        {/* Subheadline */}
         <motion.p 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="text-xl md:text-2xl text-slate-400 font-light mb-8"
+          transition={{ duration: 1, delay: 0.4 }}
+          className="text-base md:text-lg text-zinc-500 font-light tracking-wide mb-20 max-w-xl leading-relaxed"
         >
-          From Prompting to <span className="text-white font-medium">System Design</span>.
+          Getting the most out of your agent army.
         </motion.p>
 
+        {/* Balanced Card */}
         <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 p-6 rounded-2xl max-w-2xl mx-auto shadow-2xl"
+          initial={{ opacity: 0, y: 30, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="w-full max-w-4xl"
         >
-          <p className="text-lg text-slate-300 mb-4">
-            Stop using software. <span className="text-cyan-400 font-semibold">Start orchestrating swarms of agents</span> to manage outcomes.
-          </p>
-          <div className="h-px w-full bg-gradient-to-r from-transparent via-slate-600 to-transparent my-4" />
-          <div className="flex flex-col md:flex-row justify-center items-center gap-4 text-sm md:text-base">
-            <div className="flex items-center gap-2 text-slate-400">
-              <Network size={18} className="text-emerald-400" />
-              Reading is <span className="text-emerald-400 font-mono">Parallel</span> (Fast/Cheap)
-            </div>
-            <div className="hidden md:block w-1 h-1 bg-slate-600 rounded-full"></div>
-            <div className="flex items-center gap-2 text-slate-400">
-              <Layers size={18} className="text-rose-400" />
-              Writing is <span className="text-rose-400 font-mono">Linear</span> (Slow/Expensive)
+          <div className="relative rounded-2xl p-[1px] bg-gradient-to-b from-white/10 via-white/5 to-transparent">
+            <div className="bg-black/80 backdrop-blur-2xl rounded-2xl border border-white/5 overflow-hidden shadow-2xl">
+              <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-white/5">
+                
+                {/* Left Panel */}
+                <div className="p-10 flex flex-col items-center md:items-start text-center md:text-left group transition-colors hover:bg-white/[0.02]">
+                  <div className="flex items-center gap-2 mb-6">
+                     <span className="w-1.5 h-1.5 bg-zinc-600 rounded-sm"></span>
+                     <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest">Input Strategy</span>
+                  </div>
+                  <h3 className="text-2xl font-light text-white mb-2 group-hover:text-emerald-400 transition-colors">Parallel Reading</h3>
+                  <p className="text-xs text-zinc-500 font-mono uppercase tracking-wider mb-4">Fast • Cheap • Infinite Context</p>
+                  <p className="text-sm text-zinc-400 font-light leading-relaxed max-w-xs">
+                    Stuff the model with massive context via caching and RAG.
+                  </p>
+                </div>
+
+                {/* Right Panel */}
+                <div className="p-10 flex flex-col items-center md:items-start text-center md:text-left group transition-colors hover:bg-white/[0.02]">
+                   <div className="flex items-center gap-2 mb-6">
+                     <span className="w-1.5 h-1.5 bg-zinc-600 rounded-sm"></span>
+                     <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest">Output Strategy</span>
+                  </div>
+                  <h3 className="text-2xl font-light text-zinc-300 mb-2 group-hover:text-amber-400 transition-colors">Linear Writing</h3>
+                  <p className="text-xs text-zinc-500 font-mono uppercase tracking-wider mb-4">Slow • Expensive • Bottleneck</p>
+                   <p className="text-sm text-zinc-400 font-light leading-relaxed max-w-xs">
+                    Avoid generation. Use tools and routers for deterministic action.
+                  </p>
+                </div>
+
+              </div>
             </div>
           </div>
         </motion.div>
+
+         {/* Scroll Indicator */}
+         <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5, duration: 1 }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2"
+         >
+           <ArrowDown className="text-zinc-800" size={20} />
+         </motion.div>
+
       </div>
     </section>
   );
